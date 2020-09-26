@@ -61,6 +61,10 @@ func (b *Bus) Listen(name string, listener Listener) {
 	b.listeners[name] = append(b.listeners[name], listener)
 }
 
+func (b *Bus) ListenEvent(e Event, listener Listener) {
+	b.Listen(e.GetEventName(), listener)
+}
+
 func (b *Bus) resolveEvent(input interface{}) (Event, error) {
 	if e, ok := input.(Event); ok {
 		return e, nil
